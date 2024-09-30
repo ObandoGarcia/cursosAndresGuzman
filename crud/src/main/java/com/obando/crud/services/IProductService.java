@@ -9,5 +9,6 @@ public interface IProductService{
     List<Product> findAll();
     Optional<Product> findById(Integer id);
     Product save(Product product);
+    Optional<Product> update(Integer id, Product product);
     Optional<Product> delete(Integer id);
 }

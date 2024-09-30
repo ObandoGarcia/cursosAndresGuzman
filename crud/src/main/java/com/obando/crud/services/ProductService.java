@@ -35,6 +35,20 @@ public class ProductService implements IProductService{
 
     @Transactional
     @Override
+    public Optional<Product> update(Integer id, Product product) {
+        Optional<Product> productTemp = productRepository.findById(id);
+        if(productTemp.isPresent()){
+            Product prod = productTemp.orElseThrow();
+            prod.setName(product.getName());
+            prod.setDescription(product.getDescription());
+            prod.setPrice(product.getPrice());
+            return Optional.of(productRepository.save(prod));
+        }
+        return productTemp;
+    }
+
+    @Transactional
+    @Override
     public Optional<Product> delete(Integer id) {
         Optional<Product> productTemp = productRepository.findById(id);
         productTemp.ifPresent(prod -> {
